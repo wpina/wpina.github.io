@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/心情/" style="font-size: 10px;">心情</a> <a href="/tags/闲谈/" style="font-size: 20px;">闲谈</a>
+						<a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/心情/" style="font-size: 10px;">心情</a> <a href="/tags/闲谈/" style="font-size: 20px;">闲谈</a>
 					</div>
 				</section>
 				
@@ -188,6 +188,59 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-iOS如何截屏或view生成image之后支持背景透明" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/23/iOS如何截屏或view生成image之后支持背景透明/" class="article-date">
+  	<time datetime="2020-05-23T14:15:36.000Z" itemprop="datePublished">2020-05-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/23/iOS如何截屏或view生成image之后支持背景透明/">iOS如何截屏或view生成image之后支持背景透明</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在iOS开发中，一般我们在截屏或把一个带有透明背景的view转成image的时候，我们发现透明部分变成黑色背景了如下图<br>那如果解决这个问题<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">UIImage</span> *)makeImageWithView:(<span class="built_in">UIView</span> *)orgView withSize:(<span class="built_in">CGSize</span>)size&#123;</span><br><span class="line">    <span class="built_in">CGFloat</span> scale = [<span class="built_in">UIScreen</span> mainScreen].scale;</span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>(orgView.bounds.size, <span class="literal">NO</span>, scale);</span><br><span class="line">    <span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    <span class="built_in">CGContextSaveGState</span>(context);</span><br><span class="line">    [orgView.layer renderInContext:context];</span><br><span class="line">    <span class="built_in">UIImage</span> *image = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//把像素rect 转化为点rect（如无转化则按原图像素取部分图片）</span></span><br><span class="line">    <span class="built_in">CGFloat</span> x= orgView.frame.origin.x*scale,y=orgView.frame.origin.y*scale,w=orgView.frame.size.width*scale,h=orgView.frame.size.height*scale;</span><br><span class="line">    <span class="built_in">CGRect</span> dianRect = <span class="built_in">CGRectMake</span>(x, y, w, h);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//截取部分图片并生成新图片</span></span><br><span class="line">    <span class="built_in">CGImageRef</span> sourceImageRef = [image <span class="built_in">CGImage</span>];</span><br><span class="line">    <span class="built_in">CGImageRef</span> newImageRef = <span class="built_in">CGImageCreateWithImageInRect</span>(sourceImageRef, dianRect);</span><br><span class="line">    <span class="built_in">UIImage</span> *newImage = [<span class="built_in">UIImage</span> imageWithCGImage:newImageRef scale:scale orientation:<span class="built_in">UIImageOrientationUp</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-重拾博客" class="article article-type-post" itemscope itemprop="blogPost">
   
